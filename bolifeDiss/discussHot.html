@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>BoLife-留言</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" />
+    <link rel="stylesheet" href="./css/app.css" />
+    <link rel="stylesheet" href="./css/discuss/discuss.css" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/discuss/discuss.js"></script>
+</head>
+<body>
+<div class="ui fixed inverted menu">
+    <a href="/" class="header item">
+        <img class="ui" src="./img/logo.png" width="32" height="32" alt="" />
+        BoLife-留言
+    </a>
+    <a href="./discuss.html" href="#" class=" item">
+        <i class="desktop icon"></i>全部留言
+    </a>
+    <a href="./discussHot.html" class="active item">
+        <i class="list layout icon"></i>留言热榜
+    </a>
+    <a href="./postDiscuss.html" class=" item">
+        <i class="talk icon"></i>发布留言
+    </a>
+    <div class="ui simple dropdown right item" if="${current_account != null">
+        <img class="ui avatar image" src=".img/'+${current_account.avatarImgUrl" />
+        <span text="${current_account.name"></span> <i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" id="logout">
+                <i class="sign out icon"></i>退出
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="ui header container">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/"><i class="home icon"></i>首页</a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">留言热榜</div>
+    </div>
+</div>
+
+<div class="ui discussList container">
+    <div class="ui grid">
+        <div class="eleven wide column">
+            <table class="ui red table">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>标题</th>
+                        <th>热度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                        <div class="ui ribbon label red">第一</div>
+                        </td>
+                        <td ><a href="#">校招结束回顾：第一份工作的选择有多重要？</a></td>
+                        <td>100℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label orange">第二</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>99℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label yellow">第三</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>98℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">4</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">5</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">6</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">7</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">8</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">9</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">10</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                    <tr>
+                        <td><div class="ui ribbon label">11</div></td>
+                        <td><a href="#">校招结束回顾：第一份工作的选择有多重要？应该考虑清楚些什么？</a></td>
+                        <td>97℃</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="five wide column">
+            <div class="ui segment">
+                <div class="ui dividing header">
+                    <i class="world icon"></i>用户信息
+                </div>
+                <div class="ui four images">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 不可抗力元素 -->
+<div class="second-footer">
+</div>
+<div id="footer">
+    <div class="ui container">
+        <div class="ui stackable two columns grid">
+            <div class="column">
+                <div class="ui two columns grid">
+                    <div class="column">
+                        <h3>项目介绍</h3>
+                        BoLife-留言是为了PHP课程设计开发的一个留言系统。
+                    </div>
+                    <div class="column">
+                        <h3>联系我们</h3>
+                        如有问题请发邮件到
+                        1259892859@qq.com
+                    </div>
+                </div>
+            </div>
+            <div class="right aligned column">
+                &copy; 2020 WK All Rights Reserved &nbsp;&nbsp;
+                <br />
+                网站版本：<a href="#">v1.0.0 Beta #20200627</a>&nbsp;&nbsp;
+                服务器时间：<span id="current_server_timer"></span>
+                <br />
+                站长统计 | 今日IP[91] | 今日PV[4511] | 昨日IP[133] | 昨日PV[10109] | 当前在线[1]
+            </div>
+        </div>
+    </div>
+</div>
+<script inline="javascript">
+    $(function(){
+        app.init(contextPath);
+        discussPage.init(pageNum, pageSize, totalPageNum, totalPageSize, posts);
+    });
+</script>
+</body>
+</html>

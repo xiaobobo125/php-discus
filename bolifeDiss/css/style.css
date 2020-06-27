@@ -1,0 +1,36 @@
+body {
+  background-image: url(../img/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*web background*/
+.container {
+  display: table;
+  height: 100%;
+  color: white;
+}
+.title {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.row {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* centered columns styles */
+.row-centered {
+  text-align: center;
+}
+.col-centered {
+  max-width: 330px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 40px 10px;
+  display: inline-block;
+  float: none;
+  text-align: left;
+  margin-right: -4px;
+}
+.input-group {
+  margin: 10px;
+}
