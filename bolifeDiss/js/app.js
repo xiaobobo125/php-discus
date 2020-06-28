@@ -9,9 +9,8 @@ var app = {
     /**
      * 全局初始化:服务器时间获取,登录功能,退出登录
      */
-    init: function (contextPath) {
-        app.data.contextPath = contextPath;
-        // app.data.nowTime = app.toTimeStamp();
+    init: function () {
+        app.data.nowTime = app.toTimeStamp();
         console.log("服务器当前的时间==========" + app.data.nowTime);
         /**
          * 服务器时间动态显示
@@ -33,13 +32,10 @@ var app = {
         var second = localDateTime.second;
         return year + "-" + monthValue + "-" + dayOfMonth + " " + hour + ":" + minute + ":" + second;
     },
-    toTimeStamp: function (localDateTime) {
-        var currTime = localDateTime.year + "-" + localDateTime.monthValue
-            + "-" + localDateTime.dayOfMonth + " " + localDateTime.hour
-            + ":" + localDateTime.minute + ":" + localDateTime.second;
+    toTimeStamp: function () {
         //console.log("currTime = " + currTime);
         //console.log("new Date(currTime).valueOf() = " + new Date(currTime).valueOf());
-        return new Date(currTime).valueOf();
+        return new Date().valueOf();
     },
     /**
      * 时间戳转化为年 月 日 时 分 秒

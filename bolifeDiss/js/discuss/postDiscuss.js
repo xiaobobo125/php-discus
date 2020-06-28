@@ -8,6 +8,7 @@ var postDiscussPage = {
         editor: null,
     },
     init: function (authorId) {
+		postDiscussPage.data.authorId = 
         $('#postTitle').blur(function(){
             var value = $('#postTitle').val();
             if(value.length<5 || value.length > 25){
@@ -27,33 +28,31 @@ var postDiscussPage = {
         postDiscussPage.data.editor.create();
     },
     postDiscuss: function () {
-        var authorId = postDiscussPage.data.authorId;
+		var content = $('#author').val();
         var editor = postDiscussPage.data.editor;
         var title = $('#postTitle').val();
-        //alert(editor.txt.text());
-        // $.ajax({
-        //     url : app.URL.addPostUrl(),
-        //     type : "POST",
-        //     dataType: "json",
-        //     contentType : "application/json;charset=UTF-8",
-        //     data : JSON.stringify({
-        //         authorId: authorId,
-        //         title: title,
-        //         htmlContent: editor.txt.html(),
-        //         textContent: editor.txt.text(),
-        //     }),
-        //     success:function(result) {
-        //         if (result && result['success']) {
-        //             // 验证通过 刷新页面
-        //             //window.location.reload();
-        //             window.location.href = app.URL.discussUrl();
-        //         } else {
-        //             console.log(result.message);
-        //         }
-        //     },
-        //     error:function(result){
-        //         console.log(result.message);
-        //     }
-        // });
+        $.ajax({
+            url : "./include/savePost.php",
+            type : "POST",
+            dataType: "json",
+            data :{
+                authorId: content,
+                title: title,
+                htmlContent: editor.txt.html(),
+                textContent: editor.txt.text(),
+            },
+            success:function(result) {
+                if (result || result['success']) {
+                    // 验证通过 刷新页面
+                    //window.location.reload();
+                    window.location.href = "../bolifeDiss/discuss.php";
+                } else {
+                    console.log(result.message);
+                }
+            },
+            error:function(result){
+                console.log(result.message);
+            }
+        });
     },
 };

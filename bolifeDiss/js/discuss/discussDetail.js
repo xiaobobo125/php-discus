@@ -7,12 +7,7 @@ var discussDetailPage = {
         comments: [],
         userId: 0,
     },
-    init: function (post, comments, userId) {
-        discussDetailPage.data.post = post;
-        discussDetailPage.data.comments = comments;
-        discussDetailPage.data.userId = userId;
-
-        $('#postContent').html(post.htmlContent);
+    init: function () {
 
         /**
          * 回复模态框关闭按钮触发
@@ -28,72 +23,68 @@ var discussDetailPage = {
         });
     },
     addCommentsAction: function () {
-        var userId = discussDetailPage.data.userId;
-        var post = discussDetailPage.data.post;
+        var userId = $('#userId').val();
+        var post = $('#postId').val();
         var content = $('#commentContent').val();
-
-        // $.ajax({
-        //     url : app.URL.addCommentUrl(),
-        //     type : "POST",
-        //     dataType: "json",
-        //     contentType : "application/json;charset=UTF-8",
-        //     data : JSON.stringify({
-        //         userId: userId,
-        //         postId: post.id,
-        //         content: content,
-        //     }),
-        //     success:function(result) {
-        //         if (result && result['success']) {
-        //             // 验证通过 刷新页面
-        //             window.location.reload();
-        //         } else {
-        //             console.log(result.message);
-        //         }
-        //     },
-        //     error:function(result){
-        //         console.log(result.message);
-        //     }
-        // });
+        $.ajax({
+            url : "./include/addComment.php",
+            type : "POST",
+            dataType: "json",
+            data : {
+                userId: userId,
+                postId: post,
+                content: content,
+            },
+            success:function(result) {
+                if (result && result['success']) {
+                    // 验证通过 刷新页面
+                    window.location.reload();
+                } else {
+                    console.log(result.message);
+                }
+            },
+            error:function(result){
+                console.log(result.message);
+            }
+        });
     },
     /**
      * 回复模态框显示
      */
-    showReplyModal: function() {
-        // var comments = discussDetailPage.data.comments;
-        // $('#replyCommentId').val(comments[index].id);
-        // $('#replyAtuserId').val(atuserId);
+    showReplyModal: function(atuserId,commentId) {
+        $('#replyCommentId').val(commentId);
+        $('#replyAtuserId').val(atuserId);
         $('#replyModal').modal('show');
     },
     addReplyAction: function () {
-        var userId = discussDetailPage.data.userId;
-        var post = discussDetailPage.data.post;
+        var post = $('#postId').val();
+        var reuserId = $('#reuserId').val();
         var commentId = $('#replyCommentId').val();
         var atuserId = $('#replyAtuserId').val();
         var content = $('#replyContent').val();
-        // $.ajax({
-        //     url : app.URL.addReplyUrl(),
-        //     type : "POST",
-        //     dataType: "json",
-        //     contentType : "application/json;charset=UTF-8",
-        //     data : JSON.stringify({
-        //         userId: userId,
-        //         atuserId: atuserId,
-        //         postId: post.id,
-        //         commentId: commentId,
-        //         content: content,
-        //     }),
-        //     success:function(result) {
-        //         if (result && result['success']) {
-        //             // 验证通过 刷新页面
-        //             window.location.reload();
-        //         } else {
-        //             console.log(result.message);
-        //         }
-        //     },
-        //     error:function(result){
-        //         console.log(result.message);
-        //     }
-        // });
+        $.ajax({
+            url : "./include/addReply.php",
+            type : "POST",
+            dataType: "json",
+            data : {
+                userId: reuserId,
+                atuserId: atuserId,
+                postId: post,
+                commentId: commentId,
+                content: content,
+            },
+            success:function(result) {
+                if (result && result['success']) {
+                    // 验证通过 刷新页面
+                    window.location.reload();
+                } else {
+                    console.log(result.message);
+                }
+            },
+            error:function(result){
+                console.log(result.message);
+            }
+        });
     },
     addGood:function () {
         $('#good').css('color', 'red');
@@ -104,28 +95,6 @@ var discussDetailPage = {
         //     type : "POST",
         //     dataType: "json",
         //     contentType : "application/json;charset=UTF-8",
-        //     data : JSON.stringify({
-        //         accountId: userId,
-        //         postId: post.id,
-        //     }),
-        //     success: function (data) {
-        //         window.location.reload();
-        //     },
-        //     error: function () {
-        //         alert("获取数据出错!");
-        //     },
-        // });
-    },
-    subGood:function () {
-        $('#good').css('color', 'black');
-        var userId = discussDetailPage.data.userId;
-        var post = discussDetailPage.data.post;
-        // $.ajax({
-        //     url: "/discuss/api/subGood",
-        //     type : "POST",
-        //     dataType: "json",
-        //     contentType : "application/json;charset=UTF-8",
-        //     <!-- 向后端传输的数据 -->
         //     data : JSON.stringify({
         //         accountId: userId,
         //         postId: post.id,
