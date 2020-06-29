@@ -21,7 +21,7 @@ include 'include/config.php';
 </head>
 <body>
 <div class="ui fixed inverted menu">
-    <a href="/" class="header item">
+    <a href="/bolifeDiss/discuss.php" class="header item">
         <img class="ui" src="./img/logo.png" width="32" height="32" alt="" />
         BoLife-留言
     </a>
@@ -73,7 +73,6 @@ include 'include/config.php';
 				<?php
 					$sql="select * from post order by hot desc limit 0,50";
 					$rs=$db->execute($sql);
-					$rows=$db->fetch_array($rs);
 					$i = 0;
 					while($rows=$db->fetch_array($rs)){
 						$i++;
@@ -127,6 +126,44 @@ include 'include/config.php';
                     <a>
                     <i class="user icon"></i>
                     <?php echo $_SESSION['user']['email']; ?>
+                    </a>
+                </div>
+                </div>
+            </div>
+            <div class="ui segment">
+                <div class="ui dividing header">
+                    <i class="world icon"></i>网站信息
+                </div>
+                <div class="ui card">
+                <div class="image">
+                    <img src="./img/bg.jpg ?>">
+                </div>
+                <?php
+                    $sql="select * from post";
+                    $total = $db->get_rows($sql);
+                    $sql="select * from reply";
+                    $reptotal = $db->get_rows($sql);
+                    $sql="select * from comment";
+                    $comtotal = $db->get_rows($sql);
+                    $allcom = $reptotal+$comtotal;
+                    $sql="select * from good";
+                    $goodtotal = $db->get_rows($sql);
+                ?>
+                <div class="content">
+                    <a class="header">Bo-Life留言板</a>
+                    <div class="meta">
+                    <span class="date">留言数量:<?php echo $total; ?></span><br/>
+                    <span class="date">评论数量:<?php echo $allcom; ?></span><br/>
+                    <span class="date">点赞数量:<?php echo $goodtotal; ?></span>
+                    </div>
+                    <div class="description">
+                        打造不一样的留言板！
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                    <i class="user icon"></i>
+                        管理员邮箱：1259892859@qq.com
                     </a>
                 </div>
                 </div>

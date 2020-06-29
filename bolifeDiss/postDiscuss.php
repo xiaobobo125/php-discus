@@ -21,7 +21,7 @@ include 'include/config.php';
 </head>
 <body>
 <div class="ui fixed inverted menu">
-    <a href="/" class="header item">
+    <a href="/bolifeDiss/discuss.php" class="header item">
         <img class="ui" src="./img/logo.png" width="32" height="32" alt="" />
         BoLife-留言
     </a>
@@ -62,6 +62,7 @@ include 'include/config.php';
         <!--<i class="close icon"></i>-->
         <div class="header"><i class="warning icon"></i>注意</div>
         <p>请注意帖子的言语措辞,如果出现恶意中伤别人,诽谤他人,帖子将被删除,发帖人将会被惩罚。</p>
+        <p>留言请遵守法律法规。</p>
     </div>
     <form class="ui form">
         <div class="field">

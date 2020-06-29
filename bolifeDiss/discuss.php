@@ -22,7 +22,7 @@ $page=$_GET['page'];if(empty($page)) $page=1;
 </head>
 <body>
 <div class="ui fixed inverted menu">
-    <a href="/" class="header item">
+    <a href="/bolifeDiss/discuss.php" class="header item">
         <img class="ui" src="./img/logo.png" width="32" height="32" alt="" />
         BoLife-留言
     </a>
@@ -92,7 +92,7 @@ $page=$_GET['page'];if(empty($page)) $page=1;
                         <div class="extra" style="font-size: 13px;">
                             <span class="right floated">
                                 <i class="talk outline icon"></i>
-                                <span><?php echo $rows['id'];?></span>
+                                <span><?php echo $rows['reply_num'];?></span>
                                 |
                                 <i class="thumbs outline up icon"></i>
                                 <span><?php echo $rows['good_num'];?></span>
@@ -106,9 +106,32 @@ $page=$_GET['page'];if(empty($page)) $page=1;
                         </div>
                     </div>
                 </div>
-			<?php }}?>
+            <?php 
+                }
+                }else{?>
+            <div class="ui discussList container">
+                <div class="ui grid">   
+                    <div class="eleven wide column">
+                        <div class="ui green secondary pointing menu" style="margin-top: 1em;">
+                            <a class="active item">全部留言</a>
+                            <div class="right item">
+                                <a href="./postDiscuss.php" class="positive ui button"><i class="write icon"></i>我要发布</a>
+                            </div>
+                        </div>
+                        <div class="ui divided items">
+                            <div class="item">
+                                <div class="ui avatar image mini">
+                                    <img src="./img/404.jpg" />
+                                </div>
+                                <div class="content">
+                                    还没有发布哦！快去点击我要发布发布留言吧！
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
             </div>
-        </div>
         <div class="five wide column">
             <div class="ui segment">
                 <div class="ui dividing header">
@@ -137,7 +160,44 @@ $page=$_GET['page'];if(empty($page)) $page=1;
                 </div>
                 </div>
             </div>
+            <div class="ui segment">
+                <div class="ui dividing header">
+                    <i class="world icon"></i>网站信息
+                </div>
+                <div class="ui card">
+                <div class="image">
+                    <img src="./img/bg.jpg ?>">
+                </div>
+                <?php
+                    $sql="select * from reply";
+                    $reptotal = $db->get_rows($sql);
+                    $sql="select * from comment";
+                    $comtotal = $db->get_rows($sql);
+                    $allcom = $reptotal+$comtotal;
+                    $sql="select * from good";
+                    $goodtotal = $db->get_rows($sql);
+                ?>
+                <div class="content">
+                    <a class="header">Bo-Life留言板</a>
+                    <div class="meta">
+                    <span class="date">留言数量:<?php echo $total; ?></span><br/>
+                    <span class="date">评论数量:<?php echo $allcom; ?></span><br/>
+                    <span class="date">点赞数量:<?php echo $goodtotal; ?></span>
+                    </div>
+                    <div class="description">
+                        打造不一样的留言板！
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                    <i class="user icon"></i>
+                        管理员邮箱：1259892859@qq.com
+                    </a>
+                </div>
+                </div>
+            </div>
         </div>
+        
     </div>
 </div>
 <!-- 分页 -->

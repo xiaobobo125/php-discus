@@ -21,7 +21,7 @@ $id=$_GET['id'];
 </head>
 <body>
 <div class="ui fixed inverted menu">
-    <a href="/" class="header item">
+    <a href="/bolifeDiss/discuss.php" class="header item">
         <img class="ui" src="./img/logo.png" width="32" height="32" alt="" />
         BoLife-留言
     </a>
@@ -84,10 +84,25 @@ $id=$_GET['id'];
                         <span>编辑于 <?php echo $row['create_time'] ?></span>
                         <span style="margin-left: 28em;">
                                 <i class="talk outline icon"></i>
-                                <span><?php echo $row['id'] ?></span>
+                                <span><?php echo $row['reply_num'] ?></span>
                                 |
-                                <i class="thumbs outline up icon"></i>
-                                <span><?php echo $row['good_num'] ?></span>
+                                <?php 
+                                    $sql="select * from good where post_id=".$id;
+                                    $good=$db->execute($sql);
+                                    $flag = 1;
+                                    while($goodRw=$db->fetch_array($good)){
+                                        if($goodRw['account_id'] == $_SESSION['user']['id']){
+                                            $flag = 0;
+                                        }
+                                    }
+                                    if($flag == 1 ){
+                                ?>
+                                    <i class="thumbs outline up icon" id="good" onclick="discussDetailPage.addGood()" ></i>
+                                    <span id="goodnum"><?php echo $row['good_num'] ?></span>
+                                <?php } else{ ?>
+                                        <i class="thumbs outline up icon" id="good" style="color: red;"></i>
+                                        <span id="goodnum"><?php echo $row['good_num'] ?></span>
+                                <?php } ?>
                                 |
                                 <i class="unhide icon"></i>
                                 <span><?php echo $row['view_num'] ?></span>
@@ -102,7 +117,7 @@ $id=$_GET['id'];
                 if($_SESSION['user']['level'] == 1 || $_SESSION['user']['id'] == $row['author_id']){
             ?>
             <div class="ui vertical right aligned segment">
-                <a><i class="remove circle outline icon"></i>删除</a>
+                <a href="./include/admin.php?action=delete&id=<?php echo $id;?>"><i class="remove circle outline icon"></i>删除</a>
             </div>
             <?php  } ?>
             <div class="ui vertical segment">
@@ -176,7 +191,7 @@ $id=$_GET['id'];
                 </div>
             </div>
         </div>
-        <div class="five wide column">
+        <div class="five wide column right">
             <div class="ui segment">
                 <div class="ui dividing header">
                     <i class="world icon"></i>个人信息
@@ -200,6 +215,44 @@ $id=$_GET['id'];
                     <a>
                     <i class="user icon"></i>
                     <?php echo $_SESSION['user']['email']; ?>
+                    </a>
+                </div>
+                </div>
+            </div>
+            <div class="ui segment">
+                <div class="ui dividing header">
+                    <i class="world icon"></i>网站信息
+                </div>
+                <div class="ui card">
+                <div class="image">
+                    <img src="./img/bg.jpg ?>">
+                </div>
+                <?php
+                    $sql="select * from post";
+                    $total = $db->get_rows($sql);
+                    $sql="select * from reply";
+                    $reptotal = $db->get_rows($sql);
+                    $sql="select * from comment";
+                    $comtotal = $db->get_rows($sql);
+                    $allcom = $reptotal+$comtotal;
+                    $sql="select * from good";
+                    $goodtotal = $db->get_rows($sql);
+                ?>
+                <div class="content">
+                    <a class="header">Bo-Life留言板</a>
+                    <div class="meta">
+                    <span class="date">留言数量:<?php echo $total; ?></span><br/>
+                    <span class="date">评论数量:<?php echo $allcom; ?></span><br/>
+                    <span class="date">点赞数量:<?php echo $goodtotal; ?></span>
+                    </div>
+                    <div class="description">
+                        打造不一样的留言板！
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                    <i class="user icon"></i>
+                        管理员邮箱：1259892859@qq.com
                     </a>
                 </div>
                 </div>
@@ -260,7 +313,7 @@ $id=$_GET['id'];
 
     $(function(){
         app.init("/discussDetail.html");
-        discussDetailPage.init();
+        discussDetailPage.init(<?php echo $_SESSION['user']['id'];?>,<?php echo $id;?>);
     });
 </script>
 </body>

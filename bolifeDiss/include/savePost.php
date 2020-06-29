@@ -4,6 +4,8 @@
 	$htmlContent = $_POST['htmlContent'];
 	$textContent = $_POST['textContent'];
 	$authorId = $_POST['authorId'];
+	$textContent = addslashes($textContent);
+	$htmlContent= addslashes($htmlContent);
 	$sql = "insert into post (author_id,html_content,text_content,create_time,update_time,last_reply_time,title)values(".$authorId.",'".$htmlContent."','".$textContent."',now(),now(),now(),'".$title."')";
 	$rs=$db->insert($sql);
 	$arr = array();

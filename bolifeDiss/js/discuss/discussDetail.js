@@ -7,8 +7,9 @@ var discussDetailPage = {
         comments: [],
         userId: 0,
     },
-    init: function () {
-
+    init: function (userId,post) {
+        discussDetailPage.data.post = post;
+        discussDetailPage.data.userId = userId;
         /**
          * 回复模态框关闭按钮触发
          */
@@ -90,22 +91,24 @@ var discussDetailPage = {
         $('#good').css('color', 'red');
         var userId = discussDetailPage.data.userId;
         var post = discussDetailPage.data.post;
-        // $.ajax({
-        //     url: "/discuss/api/addGood",
-        //     type : "POST",
-        //     dataType: "json",
-        //     contentType : "application/json;charset=UTF-8",
-        //     data : JSON.stringify({
-        //         accountId: userId,
-        //         postId: post.id,
-        //     }),
-        //     success: function (data) {
-        //         window.location.reload();
-        //     },
-        //     error: function () {
-        //         alert("获取数据出错!");
-        //     },
-        // });
+        
+        $.ajax({
+            url : "./include/addGood.php",
+            type : "POST",
+            dataType: "json",
+            data : {
+                accountId: userId,
+                postId: post,
+            },
+            success: function (data) {
+                $('#good').attr('onclick','');
+                $('#goodnum').html(data['num']);
+                // window.location.reload();
+            },
+            error: function () {
+                alert("获取数据出错!");
+            },
+        });
     },
     increaseViewCount: function(articleId) {
         if ($.cookie("viewId") != discussDetailPage.data.post.id || $.cookie("viewId") == null) {
